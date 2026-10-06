@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# FloatWindow is a dwm class makes windows open in floating mode
+
+OUT=@DEFAULT_AUDIO_SINK@
+IN=@DEFAULT_AUDIO_SOURCE@
+case $BLOCK_BUTTON in
+	1) wpctl set-mute $OUT toggle && notify-send "Output Muted." ;;
+	2) wpctl set-mute $IN toggle && notify-send "Input Muted." ;; 
+	3) setsid -f st -c "FloatWindow" -e wiremix -t nocolor >/dev/null 2>&1;;
+esac
+
+echo "test sound"
+

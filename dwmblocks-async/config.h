@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 // String used to delimit block outputs in the status.
-#define DELIMITER "  "
+#define DELIMITER " | "
 
 // Maximum number of Unicode characters that a block can output.
 #define MAX_BLOCK_OUTPUT_LENGTH 45
@@ -18,6 +18,7 @@
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
 #define BLOCKS(X)             \
-    X("", "/home/kindz/dots/scripts/test", 60, 1)
+    X("", "/home/kindz/dots/scripts/test", 60, 1) \
+    X("", "/home/kindz/dots/scripts/sound", 60, 2)
 
 #endif  // CONFIG_H
