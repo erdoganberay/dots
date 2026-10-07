@@ -71,21 +71,15 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bar, "-nf", col_text, "-sb", col_selbg, "-sf", col_seltext, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *volumeUp[] = {"/usr/bin/wpctl",  "set-volume",  "@DEFAULT_AUDIO_SINK@",  "5%+","-l","1.0",NULL};
-static const char *volumeDown[] = {"/usr/bin/wpctl",  "set-volume",  "@DEFAULT_AUDIO_SINK@",  "5%-","-l","1.0",NULL};
-static const char *volumeMute[] = {"/usr/bin/wpctl",  "set-mute",  "@DEFAULT_AUDIO_SINK@",  "toggle",NULL};
-static const char *micMute[] = {"/usr/bin/wpctl",  "set-mute",  "@DEFAULT_AUDIO_SOURCE@",  "toggle",NULL};
-static const char *brightnessUp[] = {"brightnessctl","set","10%+",NULL};
-static const char *brightnessDown[] = {"brightnessctl","set","10%-",NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{0,              XF86XK_AudioRaiseVolume,  spawn,          {.v = volumeUp} },
-	{0,              XF86XK_AudioLowerVolume,  spawn,          {.v = volumeDown} },
-	{0,              XF86XK_AudioMute,         spawn,          {.v = volumeMute} },
-	{0,              XF86XK_AudioMicMute,      spawn,          {.v = micMute} },
-	{0,              XF86XK_MonBrightnessUp,   spawn,          {.v = brightnessUp} },
-	{0,              XF86XK_MonBrightnessDown, spawn,          {.v = brightnessDown} },
+	{0,              XF86XK_AudioRaiseVolume,  spawn,          SHCMD("volume_up") },
+	{0,              XF86XK_AudioLowerVolume,  spawn,          SHCMD("volume_down") },
+	{0,              XF86XK_AudioMute,         spawn,          SHCMD("volume_toggle") },
+	{0,              XF86XK_AudioMicMute,      spawn,          SHCMD("mic_toggle") },
+	{0,              XF86XK_MonBrightnessUp,   spawn,          SHCMD("brightness_up") },
+	{0,              XF86XK_MonBrightnessDown, spawn,          SHCMD("brightness_down") },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },

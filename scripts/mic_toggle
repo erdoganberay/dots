@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+/usr/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle  >/dev/null 2>&1
+kill -35 $(pidof dwmblocks)
+

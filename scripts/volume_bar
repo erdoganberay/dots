@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+OUT=@DEFAULT_AUDIO_SINK@
+IN=@DEFAULT_AUDIO_SOURCE@
+
+RED="#f38ba8"
+GREEN="#a6e3a1"
+FG="#bbbbbb"
+
+ICON_VOL_MUTED=$'\U000f0581'
+ICON_VOL=$'\U000f057e'
+ICON_MIC=$'\U000f036c'
+ICON_MIC_MUTED=$'\U000f036d'
+
+case $BLOCK_BUTTON in
+    1) setsid -f sh -c 'st -c FloatWindow -e wiremix; kill -35 $(pidof dwmblocks)' >/dev/null 2>&1 ;;
+esac
+
+output_status=$(wpctl get-volume "$OUT")
+input_status=$(wpctl get-volume "$IN")
+
+if [[ $output_status == *MUTED* ]]; then
+    out_color=$RED
+    out_icon=$ICON_VOL_MUTED
+    out_text="0"
+else
+    out_color=$GREEN
+    out_icon=$ICON_VOL
+    out_text=$(awk '{printf "%.0f", $2 * 100}' <<< "$output_status")
+fi
+
+if [[ $input_status == *MUTED* ]]; then
+    in_color=$RED
+    in_icon=$ICON_MIC_MUTED
+else
+    in_color=$GREEN
+    in_icon=$ICON_MIC
+fi
+
+printf '^c%s^^f4^%s^f4^^c%s^^f4^%s^f4^^c%s^%s^d^\n' \
+    "$in_color" "$in_icon" \
+    "$out_color" "$out_icon" \
+    "$FG" "$out_text"

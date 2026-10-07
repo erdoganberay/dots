@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+brightnessctl set 5%+ >/dev/null 2>&1
