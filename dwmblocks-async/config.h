@@ -18,7 +18,8 @@
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
 #define BLOCKS(X)             \
-    X("", "/home/kindz/dots/scripts/volume_bar", 0, 1) \
-    X("", "echo test", 0, 0)
+    X("", "/home/kindz/dots/scripts/statusbar/sb_volume", 0, 1) \
+    X("", "/home/kindz/dots/scripts/statusbar/sb_battery", 30, 2) \
+    X("", "/home/kindz/dots/scripts/statusbar/sb_date", 60, 3)
 
 #endif  // CONFIG_H
